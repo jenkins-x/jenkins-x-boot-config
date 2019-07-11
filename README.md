@@ -85,3 +85,4 @@ When using `jx step helm apply` we now allow `values.yaml` files to use go/helm 
 We can then check in the `values.yaml` file which does all of this composition and reference the actual secret values via URLs (or template functions) to access vault or local vault files
 
 To do this we use expressions like: `{{ .Parameter.pipelineUser.token }}` somewhere in the `values.yaml` values file. So this is like injecting values into the helm templates; but it happens up front to help generate the `values.yaml` files.
+.
