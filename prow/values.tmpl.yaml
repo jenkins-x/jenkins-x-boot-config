@@ -1,0 +1,18 @@
+{{- if eq .Requirements.webhook "prow" }}
+enabled: true
+{{- else }}
+enabled: false
+{{- end }}
+
+hmacToken: "{{ .Parameters.prow.hmacToken }}"
+oauthToken: "{{ .Parameters.pipelineUser.github.token }}"
+user: "{{ .Parameters.pipelineUser.github.username }}"
+
+buildnum:
+  enabled: false
+pipelinerunner:
+  enabled: "true"
+tillerNamespace: ""
+
+sinker:
+  replicaCount: 0

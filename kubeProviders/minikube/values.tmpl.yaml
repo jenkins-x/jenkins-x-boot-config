@@ -1,5 +1,0 @@
-# Override configuration from https://github.com/jenkins-x/jenkins-x-platform/blob/master/jenkins-x-platform/values.yaml
-exposecontroller:
-  exposecontroller:
-    HTTP: "true"
-    TLSACME: "false"

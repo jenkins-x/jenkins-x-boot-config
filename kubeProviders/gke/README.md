@@ -1,1 +1,0 @@
-# Jenkins X Boot configuration for Google Container Engine

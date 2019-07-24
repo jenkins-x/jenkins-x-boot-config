@@ -1,9 +1,0 @@
-# Override configuration from https://github.com/jenkins-x/jenkins-x-platform/blob/master/jenkins-x-platform/values.yaml
-
-PipelineSecrets:
-
-  # lets enable ECR docker builds
-  DockerConfig: |-
-    {
-      "credsStore": "ecr-login"
-    }

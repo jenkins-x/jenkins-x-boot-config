@@ -1,7 +1,0 @@
-cert-manager:
-  rbac:
-    create: true
-  webhook:
-    enabled: false
-webhook:
-  enabled: false

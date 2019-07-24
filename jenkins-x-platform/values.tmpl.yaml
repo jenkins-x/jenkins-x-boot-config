@@ -1,0 +1,117 @@
+expose:
+  enabled: false
+
+JXBasicAuth: "{{ .Parameters.adminUser.username }}:{SHA}{{ .Parameters.adminUser.password | hashPassword }}"
+
+expose:
+  enabled: false
+
+cleanup:
+  enabled: false
+
+chartmuseum:
+  env:
+    secret:
+      BASIC_AUTH_USER: "{{ .Parameters.adminUser.username }}"
+      BASIC_AUTH_PASS: "{{ .Parameters.adminUser.password }}"
+
+nexus:
+    defaultAdminPassword: "{{ .Parameters.adminUser.password }}"
+
+PipelineSecrets:
+    GitCreds: "https://{{ .Parameters.pipelineUser.github.username }}:{{ .Parameters.pipelineUser.github.token }}@{{ .Parameters.pipelineUser.github.host }}"
+    GithubToken: "{{ .Parameters.pipelineUser.github.token }}"
+    MavenSettingsXML: |-
+        <settings>
+            <localRepository>/home/jenkins/.mvnrepository</localRepository>
+            <!--This sends everything else to /public -->
+            <mirrors>
+                <mirror>
+                    <id>nexus</id>
+                    <mirrorOf>external:*</mirrorOf>
+                    <url>http://nexus/repository/maven-group/</url>
+                </mirror>
+            </mirrors>
+
+            <!-- lets disable the download progress indicator that fills up logs -->
+            <interactiveMode>false</interactiveMode>
+
+            <servers>
+                <server>
+                    <id>local-nexus</id>
+                    <username>{{ .Parameters.adminUser.username }}</username>
+                    <password>{{ .Parameters.adminUser.password }}</password>
+                </server>
+                <server>
+                    <id>nexus</id>
+                    <username>{{ .Parameters.adminUser.username }}</username>
+                    <password>{{ .Parameters.adminUser.password }}</password>
+                </server>
+                <server>
+                    <id>docker.io</id>
+                </server>
+            </servers>
+
+            <profiles>
+                <profile>
+                    <id>nexus</id>
+                    <properties>
+                        <altDeploymentRepository>local-nexus::default::http://nexus/repository/maven-snapshots/</altDeploymentRepository>
+                        <altReleaseDeploymentRepository>local-nexus::default::http://nexus/repository/maven-releases/</altReleaseDeploymentRepository>
+                        <altSnapshotDeploymentRepository>local-nexus::default::http://nexus/repository/maven-snapshots/</altSnapshotDeploymentRepository>
+                    </properties>
+
+                    <repositories>
+                        <repository>
+                            <id>central</id>
+                            <url>http://central</url>
+                            <releases><enabled>true</enabled></releases>
+                            <snapshots><enabled>true</enabled></snapshots>
+                        </repository>
+                    </repositories>
+                    <pluginRepositories>
+                        <pluginRepository>
+                            <id>central</id>
+                            <url>http://central</url>
+                            <releases><enabled>true</enabled></releases>
+                            <snapshots><enabled>true</enabled></snapshots>
+                        </pluginRepository>
+                    </pluginRepositories>
+                </profile>
+                <profile>
+                    <id>repo.jenkins-ci.org</id>
+                    <properties>
+                        <altDeploymentRepository>repo.jenkins-ci.org::default::https://repo.jenkins-ci.org/releases/</altDeploymentRepository>
+                        <altReleaseDeploymentRepository>repo.jenkins-ci.org::default::https://repo.jenkins-ci.org/releases/</altReleaseDeploymentRepository>
+                        <altSnapshotDeploymentRepository>repo.jenkins-ci.org::default::https://repo.jenkins-ci.org/snapshots/</altSnapshotDeploymentRepository>
+                    </properties>
+
+                </profile>
+                <profile>
+                    <id>maven.jenkins-ci.org</id>
+                    <properties>
+                        <altDeploymentRepository>maven.jenkins-ci.org::default::https://maven.jenkins-ci.org/releases/</altDeploymentRepository>
+                        <altReleaseDeploymentRepository>maven.jenkins-ci.org::default::https://maven.jenkins-ci.org/releases/</altReleaseDeploymentRepository>
+                        <altSnapshotDeploymentRepository>maven.jenkins-ci.org::default::https://maven.jenkins-ci.org/snapshots/</altSnapshotDeploymentRepository>
+                    </properties>
+
+                </profile>
+                <profile>
+                    <id>release</id>
+                    <properties>
+                        <gpg.executable>gpg</gpg.executable>
+                        <!-- TODO use: .Parameters.gpg.passphrase when it is always populated -->
+                        <gpg.passphrase></gpg.passphrase>
+                    </properties>
+                </profile>
+            </profiles>
+
+            <activeProfiles>
+                <activeProfile>nexus</activeProfile>
+            </activeProfiles>
+        </settings>
+    SSHConfig: |-
+        Host github.com
+            User git
+            IdentityFile /root/.ssh-git/ssh-key
+            StrictHostKeyChecking no

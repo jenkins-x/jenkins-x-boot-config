@@ -1,1 +1,0 @@
-# Jenkins X Boot configuration for Oracle Cloud Infrastructure Container Engine for Kubernetes

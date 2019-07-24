@@ -1,0 +1,12 @@
+adminUser:
+  password: vault:facelie/adminUser:password
+  username: admin
+enableDocker: false
+gitProvider: github
+pipelineUser:
+  github:
+    host: github.com
+    token: vault:facelie/pipelineUser-github:token
+    username: muirp-owner
+prow:
+  hmacToken: vault:facelie/prow:hmacToken
