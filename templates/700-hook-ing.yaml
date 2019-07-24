@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hook
+  annotations:
+    kubernetes.io/ingress.class: nginx
+{{- if eq .Values.certmanager.production "true" }}
+    certmanager.k8s.io/issuer: letsencrypt-prod
+{{- else }}
+    certmanager.k8s.io/issuer: letsencrypt-staging
+{{- end }}
+spec:
+  rules:
+  - host: hook{{ .Values.cluster.namespaceSubDomain }}{{ .Values.cluster.domain }}
+    http:
+      paths:
+      - backend:
+          serviceName: hook
+          servicePort: 80
+{{- if .Values.cluster.tls }}
+  tls:
+  - hosts:
+    - hook{{ .Values.cluster.namespaceSubDomain }}{{ .Values.cluster.domain }}
+{{- if eq .Values.certmanager.production "true" }}
+    secretName: "tls-{{ .Values.cluster.domain | replace "." "-" }}-p"
+{{- else }}
+    secretName: "tls-{{ .Values.cluster.domain | replace "." "-" }}-s"
+{{- end }}
+{{- end }}

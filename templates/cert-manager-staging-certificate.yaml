@@ -1,0 +1,20 @@
+{{- if eq .Values.certmanager.production "false" }}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: "tls-{{ .Values.cluster.domain | replace "." "-" }}-s"
+spec:
+  secretName: "tls-{{ .Values.cluster.domain | replace "." "-" }}-s"
+  issuerRef:
+    name: letsencrypt-staging
+  commonName: "*.{{ .Values.cluster.domain }}"
+  dnsNames:
+  - "*.{{ .Values.cluster.domain }}"
+  acme:
+    config:
+    - dns01:
+        provider: jenkins-x-dns
+      domains:
+      - "*.{{ .Values.cluster.domain }}"
+      - "{{ .Values.cluster.domain }}"
+{{- end }}

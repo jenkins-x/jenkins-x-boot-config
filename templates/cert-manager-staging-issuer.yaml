@@ -1,0 +1,26 @@
+{{- if eq .Values.certmanager.production "false" }}
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Issuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    email: "{{ .Values.certmanager.email }}"
+    # Name of a secret used to store the ACME account private key
+    privateKeySecretRef:
+      name: letsencrypt-staging
+    solvers:
+      # ACME DNS-01 provider configurations
+      dns01:
+        # Here we define a list of DNS-01 providers that can solve DNS challenges
+        providers:
+          - name: jenkins-x-dns
+            clouddns:
+              # A secretKeyRef to a google cloud json service account
+              serviceAccountSecretRef:
+                name: external-dns-gcp-sa
+                key: credentials.json
+              # The project in which to update the DNS zone
+              project: "{{ .Values.cluster.projectID }}"
+{{- end }}

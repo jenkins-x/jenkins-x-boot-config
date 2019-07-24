@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  domain: {{ .Values.cluster.domain }}
+  email: ""
+  exposer: Ingress
+  issuer: ""
+  tls: {{ .Values.cluster.tls | quote }}
+kind: ConfigMap
+metadata:
+  name: ingress-config

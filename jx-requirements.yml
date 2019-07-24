@@ -1,17 +1,21 @@
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
-  project: ""
+  clusterName: facelie
+  environmentGitOwner: muirp-owner
+  gitKind: github
+  gitName: github
+  gitServer: https://github.com
+  namespace: jx
+  project: apps-dev-229310
   provider: gke
-  zone: ""
-gitops: false
+  zone: europe-west1-b
 environments:
 - key: dev
 - key: staging
 - key: production
 ingress:
-  domain: ""
+  domain: 34.77.253.212.nip.io
   externalDNS: false
+  namespaceSubDomain: -jx.
   tls:
     email: ""
     enabled: false
@@ -28,4 +32,7 @@ storage:
   repository:
     enabled: false
     url: ""
+versionStream:
+  ref: master
+  url: https://github.com/jenkins-x/jenkins-x-versions.git
 webhook: prow

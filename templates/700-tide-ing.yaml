@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/auth-secret: jx-basic-auth
+    nginx.ingress.kubernetes.io/auth-type: basic
+  name: tide
+spec:
+  rules:
+  - host: tide{{ .Values.cluster.namespaceSubDomain }}{{ .Values.cluster.domain }}
+    http:
+      paths:
+      - backend:
+          serviceName: tide
+          servicePort: 80
+{{- if .Values.cluster.tls }}
+  tls:
+  - hosts:
+    - tide{{ .Values.cluster.namespaceSubDomain }}{{ .Values.cluster.domain }}
+{{- if eq .Values.certmanager.production "true" }}
+    secretName: "tls-{{ .Values.cluster.domain | replace "." "-" }}-p"
+{{- else }}
+    secretName: "tls-{{ .Values.cluster.domain | replace "." "-" }}-s"
+{{- end }}
+{{- end }}
