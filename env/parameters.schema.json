@@ -44,9 +44,9 @@
           "format": "token",
           "title": "Pipeline bot Git token",
           "description": "A token for the Git user that will perform git operations inside a pipeline. This includes environment repository creation, and so this token should have full repository permissions. To create a token go to https://github.com/settings/tokens/new?scopes=repo,read:user,read:org,user:email,write:repo_hook,delete_repo then enter a name, click Generate token, and copy and paste the token into this prompt.",
-          "minLength": 40,
+          "minLength": 10,
           "maxLength": 40,
-          "pattern": "^[0-9a-f]{40}$"
+          "pattern": "^[0-9a-zA-Z]{10,40}$"
         }
       }
     },
