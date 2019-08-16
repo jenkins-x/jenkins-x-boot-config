@@ -57,7 +57,7 @@ pipelineConfig:
                 args: ['step','helm','apply', '--boot', '--remote', '--no-vault', '--name', 'jx']
               - name: install-vault
                 dir: /workspace/source/systems/vault
-                command: jjx
+                command: jx
                 args: ['step', 'boot','vault']
               - name: helm-populate-params
                 dir: /workspace/source/env
