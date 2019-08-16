@@ -151,3 +151,11 @@ certmanager:
   enabled: false
 {{- end }}
 {{- end }}
+
+
+vault:
+{{- if eq .Requirements.secretStorage "vault" }}
+  enabled: true
+{{- else }}
+  enabled: false
+{{- end }}
