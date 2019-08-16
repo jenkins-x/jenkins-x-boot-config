@@ -1,0 +1,4 @@
+vault:
+  service:
+    annotations:
+      fabric8.io/exposeUrl: vault{{ .Requirements.ingress.namespaceSubDomain | default ".jx." }}{{ .Requirements.ingress.domain }}
