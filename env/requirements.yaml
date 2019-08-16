@@ -12,9 +12,6 @@ dependencies:
   repository: http://chartmuseum.jenkins-x.io
 - name: jenkins-x-platform
   repository: http://chartmuseum.jenkins-x.io
-- condition: external-dns.enabled
-  name: external-dns
-  repository: https://charts.bitnami.com/bitnami
 #- condition: chartmuseum.enabled
 #  name: chartmuseum
 #  repository: http://chartmuseum.jenkins-x.io

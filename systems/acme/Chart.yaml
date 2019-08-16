@@ -1,0 +1,5 @@
+description: ACME Chart
+maintainers:
+- name: Team
+name: acme
+version: "1"
