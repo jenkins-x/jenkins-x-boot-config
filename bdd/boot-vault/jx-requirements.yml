@@ -14,13 +14,15 @@ environments:
   - key: production
     owner: ""
     repository: ""
+gitops: true
 ingress:
-  domain: ""
-  externalDNS: false
+  domain: boot.bdd.jenkins-x.rocks
+  externalDNS: true
+  namespaceSubDomain: -jx.
   tls:
-    email: ""
-    enabled: false
-    production: false
+    email: jenkins-x@googlegroups.com
+    enabled: true
+    production: true
 kaniko: true
 secretStorage: vault
 storage:
