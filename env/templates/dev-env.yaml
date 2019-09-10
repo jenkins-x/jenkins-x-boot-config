@@ -33,6 +33,7 @@ spec:
     importMode: YAML
     kubeProvider: gke
     pipelineUsername: "{{ .Values.JenkinsXGitHub.username }}"
+    pipelineUserEmail: "{{ .Values.JenkinsXGitHub.email }}"
     promotionEngine: Prow
     prowConfig: Scheduler
     prowEngine: Tekton

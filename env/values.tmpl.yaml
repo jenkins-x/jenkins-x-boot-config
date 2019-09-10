@@ -140,6 +140,7 @@ tekton:
 
 JenkinsXGitHub:
   username: "{{ .Parameters.pipelineUser.username }}"
+  email: "{{ .Parameters.pipelineUser.email }}"
   password: "{{ .Parameters.pipelineUser.token }}"
 
 {{- if .Requirements.ingress.tls }}
