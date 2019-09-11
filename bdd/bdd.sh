@@ -15,7 +15,7 @@ export GH_OWNER="cb-kubecd"
 
 export GH_CREDS_PSW="$(jx step credential -s jenkins-x-bot-test-github)"
 export JENKINS_CREDS_PSW="$(jx step credential -s  test-jenkins-user)"
-export GKE_SA="$(jx step credential -k bdd-credentials.json -s bdd-secret -f sa.json)"
+export GKE_SA="$(jx step credential -k bdd-credentials.json -s bdd-secret)"
 
 # fix broken `BUILD_NUMBER` env var
 export BUILD_NUMBER="$BUILD_ID"
