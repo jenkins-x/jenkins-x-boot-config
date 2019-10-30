@@ -18,4 +18,11 @@ pipelinerunner:
 tillerNamespace: ""
 
 sinker:
+  enabled: false
   replicaCount: 0
+
+build:
+  enabled: false
+
+plank:
+  enabled: false
