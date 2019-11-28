@@ -1,0 +1,36 @@
+apiVersion: jenkins.io/v1
+kind: App
+metadata:
+  annotations:
+    jenkins.io/chart-description: UI for the CloudBees Jxui V3 product
+    jenkins.io/chart-repository: http://chartmuseum.jenkins-x.io
+  creationTimestamp: null
+  labels:
+    chart: jx-app-ui-0.1.26
+    jenkins.io/app-name: jx-app-ui
+    jenkins.io/app-version: 0.1.26
+    jenkins.io/ui-resource: "true"
+  name: jx-app-ui-jx-app-ui
+spec:
+  schemaPreprocessor:
+    args:
+    - -c
+    - /usr/bin/jx step values schema template --set domain=`echo $DOMAIN` --set tlsInCluster=`echo
+      $TLS_ENABLED`
+    command:
+    - /bin/sh
+    env:
+    - name: DOMAIN
+      valueFrom:
+        configMapKeyRef:
+          key: domain
+          name: ingress-config
+    - name: TLS_ENABLED
+      valueFrom:
+        configMapKeyRef:
+          key: tls
+          name: ingress-config
+          optional: true
+    image: gcr.io/jenkinsxio/builder-go:0.1.435
+    name: schema-preprocessor
+    resources: {}
