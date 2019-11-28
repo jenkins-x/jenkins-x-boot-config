@@ -2,7 +2,7 @@ cluster:
   clusterName: ""
   environmentGitOwner: ""
   project: ""
-  provider: gke
+  provider: minikube
   zone: ""
 gitops: true
 environments:
