@@ -1,0 +1,15 @@
+adminUser:
+  password: local:myjx/adminUser:password
+  username: admin
+docker:
+  email: 22886149@qq.com
+  password: local:myjx/docker:password
+  url: https://index.docker.io/v1/
+  username: zhangxpp
+enableDocker: true
+pipelineUser:
+  email: 22886149@qq.com
+  token: local:myjx/pipelineUser:token
+  username: zhangxpp
+prow:
+  hmacToken: local:myjx/prow:hmacToken
