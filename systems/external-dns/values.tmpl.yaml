@@ -11,4 +11,11 @@ external-dns:
   rbac:
     create: true
   domainFilters:
+# add default ingress domain  
   - "{{ .Requirements.ingress.domain }}"
+# loop over environments' ingresses and add each domain
+{{- range .Requirements.environments }}
+  {{- if .ingress.domain }}
+  - "{{ .ingress.domain }}"
+  {{- end }}
+{{- end }}
