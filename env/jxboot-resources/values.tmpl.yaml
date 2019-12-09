@@ -181,3 +181,10 @@ prow:
 {{- else }}
   enabled: false
 {{- end }}
+
+vault:
+{{- if eq .Requirements.secretStorage "vault" }}
+  enabled: true
+{{- else }}
+  enabled: false
+{{- end }}

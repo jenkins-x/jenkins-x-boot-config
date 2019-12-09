@@ -1,0 +1,24 @@
+{{- if eq .Requirements.secretStorage "vault" }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jx-auth-config
+  labels:
+    jenkins.io/created-by: jx
+    jenkins.io/config-type: auth
+data:
+  gitAuth.yaml: |
+    currentserver: "{{ .Requirements.cluster.gitServer }}"
+    defaultusername: "{{ .Parameters.pipelineUser.username }}"
+    pipelineserver: "{{ .Requirements.cluster.gitServer }}"
+    pipelineusername: "{{ .Parameters.pipelineUser.username }}"
+    servers:
+    - currentuser: "{{ .Parameters.pipelineUser.username }}"
+      kind: "{{ .Requirements.cluster.gitKind }}"
+      name: "{{ .Requirements.cluster.gitName }}"
+      url: "{{ .Requirements.cluster.gitServer }}"
+      users:
+      - apitoken: "{{ .Parameters.pipelineUser.token }}"
+        bearertoken: ""
+        username: "{{ .Parameters.pipelineUser.username }}"
+{{- end }}

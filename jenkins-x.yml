@@ -199,6 +199,29 @@ pipelineConfig:
             name: create-helm-values
           - args:
             - step
+            - create
+            - templated
+            - --parameters-file=./workspace/source/env/parameters.yaml
+            - --requirements-dir=/workspace/source/
+            - --template-file=jx-auth-configmap.tmpl.yaml
+            - --config-file=templates/jx-auth-configmap.yaml
+            command: jx
+            dir: /workspace/source/systems/jx-auth
+            name: create-jx-auth-config
+          - args:
+            - step
+            - helm
+            - apply
+            - --boot
+            - --remote
+            - --no-vault
+            - --name
+            - jx-auth
+            command: jx
+            dir: /workspace/source/systems/jx-auth
+            name: install-jx-auth-config
+          - args:
+            - step
             - helm
             - apply
             - --boot
