@@ -23,6 +23,7 @@ ingress:
     production: false
 kaniko: true
 secretStorage: vault
+repository: nexus
 storage:
   logs:
     enabled: false
@@ -36,5 +37,7 @@ storage:
 versionStream:
   ref: "master"
   url: https://github.com/jenkins-x/jenkins-x-versions.git
+vault:
+  disableURLDiscovery: true
 webhook: prow
 
