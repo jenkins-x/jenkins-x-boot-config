@@ -1,7 +1,7 @@
 autoUpdate:
   enabled: false
   schedule: ""
-bootConfigURL: https://github.com/jenkins-x/jenkins-x-boot-config.git
+bootConfigURL: https://github.com/cloudsmartio/environment-cloudsmart-cluster1-dev.git
 cluster:
   azure: {}
   clusterName: cloudsmart-cluster1
@@ -15,6 +15,7 @@ cluster:
   registry: gcr.io
   vaultName: jx-vault-cloudsmart-ci-10121901
   zone: us-central1-a
+gitops: true
 environments:
 - ingress:
     domain: ci.cloudsmart.io
