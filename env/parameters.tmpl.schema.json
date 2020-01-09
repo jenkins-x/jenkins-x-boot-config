@@ -98,7 +98,7 @@
     },
     "enableDocker": {
       "type": "boolean",
-      "title": "Do you want to configure an external Docker Registry?",
+      "title": "Do you want to configure non default Docker Registry?",
       "description": "By default Jenkins X will use the docker registry from the cloud provider. If you want to configure an external docker registry such as Docker Hub or your own existing public docker registry enter Y"
     }
   },
