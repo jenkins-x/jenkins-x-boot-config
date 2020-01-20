@@ -27,4 +27,11 @@ build:
 plank:
   enabled: false
 
+vault:
+{{- if eq .Requirements.secretStorage "vault" }}
+  enabled: true
+{{- else }}
+  enabled: false
+{{- end }}
 
+clusterName: {{ .Requirements.cluster.clusterName }}

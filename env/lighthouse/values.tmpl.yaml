@@ -18,3 +18,12 @@ replicaCount: 2
 
 image:
   repository: gcr.io/jenkinsxio/lighthouse
+
+vault:
+{{- if eq .Requirements.secretStorage "vault" }}
+  enabled: true
+{{- else }}
+  enabled: false
+{{- end }}
+
+clusterName: {{ .Requirements.cluster.clusterName }}
