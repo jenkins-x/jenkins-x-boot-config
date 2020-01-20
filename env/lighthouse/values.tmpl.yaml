@@ -27,3 +27,5 @@ vault:
 {{- end }}
 
 clusterName: {{ .Requirements.cluster.clusterName }}
+
+user: "{{ .Parameters.pipelineUser.username }}"
