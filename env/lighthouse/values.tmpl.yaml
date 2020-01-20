@@ -29,3 +29,5 @@ vault:
 clusterName: {{ .Requirements.cluster.clusterName }}
 
 user: "{{ .Parameters.pipelineUser.username }}"
+
+oauthToken: "{{ .Parameters.pipelineUser.token }}"
