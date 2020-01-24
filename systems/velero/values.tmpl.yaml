@@ -28,7 +28,7 @@ velero:
       name: gcp
       bucket: {{ .Requirements.storage.backup.url | removeScheme | quote }}
 {{- else if or (eq .Requirements.cluster.provider "aws") (eq .Requirements.cluster.provider "eks") }}
-  iinitContainers:
+  initContainers:
   - name: velero-plugin-for-aws
     image: velero/velero-plugin-for-aws:v1.0.0
     imagePullPolicy: IfNotPresent
