@@ -9,6 +9,8 @@ pipelineConfig:
         - name: pr-checks
           options:
             containerOptions:
+              name: ""
+              resources: {}
               volumeMounts:
               - mountPath: /builder/home/.jx/localSecrets/currentCluster
                 name: local-secrets
@@ -39,11 +41,21 @@ pipelineConfig:
           image: gcr.io/jenkinsxio/builder-go
         environment:
         - name: DEPLOY_NAMESPACE
-          value: jx
+          value: kube-system
+        - name: GIT_AUTHOR_NAME
+          value: johnamac7
+        - name: GIT_COMMITTER_NAME
+          value: johnamac7
+        - name: GIT_AUTHOR_EMAIL
+          value: johnmccann@juniper.net
+        - name: GIT_COMMITTER_EMAIL
+          value: johnmccann@juniper.net
         stages:
         - name: release
           options:
             containerOptions:
+              name: ""
+              resources: {}
               volumeMounts:
               - mountPath: /builder/home/.jx/localSecrets/currentCluster
                 name: local-secrets

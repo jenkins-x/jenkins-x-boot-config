@@ -1,0 +1,15 @@
+adminUser:
+  password: local:testcluster/adminUser:password
+  username: admin
+docker:
+  email: johnmccann@juniper.net
+  password: local:testcluster/docker:password
+  url: https://index.docker.io/v1/
+  username: jmac7
+enableDocker: true
+pipelineUser:
+  email: johnmccann@juniper.net
+  token: local:testcluster/pipelineUser:token
+  username: johnamac7
+prow:
+  hmacToken: local:testcluster/prow:hmacToken
