@@ -4,7 +4,7 @@ kind: Schedule
 metadata:
   name: default-backup
 spec:
-  schedule: '@every 10m'
+  schedule: {{ .Values.velero.schedule | quote }}
   template:
     excludedNamespaces: null
     excludedResources: null
@@ -16,6 +16,6 @@ spec:
     includedResources: null
     labelSelector: null
     storageLocation: ""
-    ttl: 720h0m0s
+    ttl: {{ .Values.velero.ttl }}
     volumeSnapshotLocations: null
 {{- end }}
