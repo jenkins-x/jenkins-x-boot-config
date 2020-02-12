@@ -185,6 +185,13 @@ lighthouse:
   enabled: false
 {{- end }}
 
+nexus:
+{{- if eq .Requirements.repository "nexus" }}
+  enabled: true
+{{- else }}
+  enabled: false
+{{- end }}
+
 prow:
 {{- if eq .Requirements.webhook "prow" }}
   enabled: true
