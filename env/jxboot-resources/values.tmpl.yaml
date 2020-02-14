@@ -1,3 +1,6 @@
+namespace:
+  enabled: false
+
 cluster:
   domain: {{ .Requirements.ingress.domain }}
 {{- if hasKey .Requirements.ingress "exposer" }}
