@@ -54,6 +54,9 @@ pipelineConfig:
                 optional: true
                 secretName: local-param-secrets
           steps:
+          - sh: echo "exiting to prove a point" && exit 1
+            dir: /workspace/source
+            name: exiting-right-away
           - args:
             - step
             - git
