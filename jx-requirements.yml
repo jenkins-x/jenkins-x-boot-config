@@ -3,7 +3,7 @@ cluster:
   environmentGitOwner: ""
   environmentGitPublic: false
   project: ""
-  provider: gke
+  provider: kubernetes
   zone: ""
 gitops: true
 environments:
