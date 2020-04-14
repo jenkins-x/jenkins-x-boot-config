@@ -39,4 +39,4 @@ versionStream:
   url: https://github.com/jenkins-x/jenkins-x-versions.git
 vault:
   disableURLDiscovery: true
-webhook: prow
+webhook: lighthouse
