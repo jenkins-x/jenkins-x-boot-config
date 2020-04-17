@@ -221,7 +221,7 @@ https://github.com/jenkins-x/jenkins-x-versions/tree/master/packages
 
 1. Open the app running in IKS 
 
-    ![](./images/jks-iks-app-2.png)
+    ![](./iks-app.png)
 
 1. Display the images used in the IBM Cloud registry
     ```
