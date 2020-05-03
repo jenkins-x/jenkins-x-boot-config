@@ -18,6 +18,8 @@ cluster:
   registry: gcr.io
   vaultName: jx-vault-cloudsmart-ci-10121901
   zone: us-central1-a
+crier:
+  replicaCount: 3
 environments:
 - ingress:
     cloud_dns_secret_name: external-dns-gcp-sa
