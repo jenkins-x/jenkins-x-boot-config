@@ -25,6 +25,9 @@ cluster:
 {{- if hasKey .Requirements.cluster "provider" }}
   provider:  {{ .Requirements.cluster.provider }}
 {{- end }}
+{{- if hasKey .Requirements.cluster "strictPermissions" }}
+  strictPermissions: {{ .Requirements.cluster.strictPermissions }}
+{{- end }}
   serverUrl: ""
 {{- if .Requirements.ingress.tls.enabled }}
   tls: true

@@ -31,3 +31,11 @@ clusterName: {{ .Requirements.cluster.clusterName }}
 user: "{{ .Parameters.pipelineUser.username }}"
 
 oauthToken: "{{ .Parameters.pipelineUser.token }}"
+
+{{- if hasKey .Requirements.cluster "strictPermissions" }}
+{{- if and (eq .Requirements.cluster.provider "openshift") (.Requirements.cluster.strictPermissions) }}
+cluster:
+  crds:
+    create: false
+{{- end }}
+{{- end }}

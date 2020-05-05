@@ -22,3 +22,15 @@ auth:
 {{- end }}
 
 tillerNamespace: ""
+
+{{- if hasKey .Requirements.cluster "strictPermissions" }}
+{{- if and (eq .Requirements.cluster.provider "openshift") (.Requirements.cluster.strictPermissions) }}
+rbac:
+  cluster: false
+cluster:
+  crds:
+    create: false
+  resources:
+    create: false
+{{- end }}
+{{- end }}

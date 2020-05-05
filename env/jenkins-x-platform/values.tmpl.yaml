@@ -181,6 +181,43 @@ controllerbuild:
   - "--verbose"
 {{- end }}
 
+{{- if hasKey .Requirements.cluster "strictPermissions" }}
+{{- if and (eq .Requirements.cluster.provider "openshift") (.Requirements.cluster.strictPermissions) }}
+gcpreviews:
+  clusterrole:
+    enabled: false
+
+postinstalljob:
+  clusterrole:
+    enabled: false
+
+controllerworkflow:
+  clusterrole:
+    enabled: false
+
+controllerbuild:
+  clusterrole:
+    enabled: false
+
+controllercommitstatus:
+  clusterrole:
+    enabled: false
+
+controllerrole:
+  clusterrole:
+    enabled: false
+
+controllerteam:
+  clusterrole:
+    enabled: false
+
+heapster:
+  enabled: false
+  rbac:
+    create: false
+{{- end }}
+{{- end }}
+
 gcactivities:
   args:
     - "gc"
@@ -190,8 +227,20 @@ gcactivities:
   cronjob:
     enabled: true
     schedule: "0/30 * * * *"
+{{- if hasKey .Requirements.cluster "strictPermissions" }}
+{{- if and (eq .Requirements.cluster.provider "openshift") (.Requirements.cluster.strictPermissions) }}
+  clusterrole:
+    enabled: false
+{{- end }}
+{{- end }}
 
 gcpods:
   cronjob:
     enabled: true
     schedule: "0/30 * * * *"
+{{- if hasKey .Requirements.cluster "strictPermissions" }}
+{{- if and (eq .Requirements.cluster.provider "openshift") (.Requirements.cluster.strictPermissions) }}
+  clusterrole:
+    enabled: false
+{{- end }}
+{{- end }}
