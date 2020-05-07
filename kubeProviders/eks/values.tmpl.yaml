@@ -2,17 +2,26 @@
 jenkins-x-platform:
   PipelineSecrets:
 
-    # lets enable ECR docker builds
+{{- if eq .Parameters.enableDocker true }}
     DockerConfig: |-
       {
-{{- if .Requirements.cluster.registry }}
+        "auths":{
+          {{ .Parameters.docker.url | quote }}:
+            {
+              "auth": {{ printf "%s:%s" .Parameters.docker.username .Parameters.docker.password | b64enc | quote}},
+              "email": {{ .Parameters.docker.email | quote}}
+            }
+        }
+      }
+{{- else}}
+    # lets enable ECR Docker builds
+    DockerConfig: |-
+      {
         "credHelpers": {
           "{{ .Requirements.cluster.registry }}": "ecr-login"
         }
-{{- else }}
-        "credsStore": "ecr-login"
-{{- end }}
       }
-      
+{{- end}}
+   
 docker-registry:
   enabled: false    
