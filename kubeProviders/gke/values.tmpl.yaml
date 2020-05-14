@@ -3,7 +3,19 @@
 jenkins-x-platform:
   PipelineSecrets:
 
-    # lets enable GCR docker builds
+{{- if eq .Parameters.enableDocker true }}
+    DockerConfig: |-
+      {
+        "auths":{
+          {{ .Parameters.docker.url | quote }}:
+            {
+              "auth": {{ printf "%s:%s" .Parameters.docker.username .Parameters.docker.password | b64enc | quote}},
+              "email": {{ .Parameters.docker.email | quote}}
+            }
+        }
+      }
+{{- else}}
+    # lets enable GCR Docker builds
     DockerConfig: |-
       {
           "credHelpers": {
@@ -14,6 +26,7 @@ jenkins-x-platform:
               "staging-k8s.gcr.io": "gcr"
           }
       }
+{{- end}}
 
 docker-registry:
 {{- if eq .Requirements.webhook "jenkins" }}

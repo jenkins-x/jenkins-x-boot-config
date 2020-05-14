@@ -15,6 +15,7 @@ Resources:
           - cloudformation:DeleteStack
           - eks:*
           - s3:*
+          - ecr:*
           - iam:DetachRolePolicy
           - iam:GetPolicy
           - iam:CreatePolicy

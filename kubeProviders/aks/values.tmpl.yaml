@@ -5,7 +5,7 @@ jenkins-x-platform:
     # lets enable ACR docker builds
     DockerConfig: |-
       {
-        "credsStore": "acr-linux"
+        "credsStore": "acr"
       }
     
 docker-registry:
