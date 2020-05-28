@@ -42,7 +42,7 @@ velero:
       bucket: {{ .Requirements.storage.backup.url | removeScheme | quote }}
       config:
         region: {{ .Requirements.cluster.region | quote }}
-{{- else if eq .Requirements.cluster.provider "azure" }}
+{{- else if eq .Requirements.cluster.provider "aks" }}
   initContainers:
   - name: velero-plugin-for-azure
     image: velero/velero-plugin-for-microsoft-azure:v1.0.0
