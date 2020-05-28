@@ -6,7 +6,7 @@ dockerRegistry: "{{ .Requirements.cluster.registry }}"
 expose:
   enabled: false
 
-JXBasicAuth: "{{ .Parameters.adminUser.username }}:{SHA}{{ .Parameters.adminUser.password | hashPassword }}"
+JXBasicAuth: "{{ .Parameters.adminUser.username }}:{SHA}{{ .Parameters.adminUser.password | toString | hashPassword }}"
 
 cleanup:
   enabled: false
