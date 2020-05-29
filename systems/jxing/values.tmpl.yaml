@@ -1,5 +1,7 @@
 nginx-ingress:
   controller:
+    image:
+      repository: gcr.io/jenkinsxio/nginx-ingress-controller
     replicaCount: 3
     extraArgs:
       publish-service: kube-system/jxing-nginx-ingress-controller
