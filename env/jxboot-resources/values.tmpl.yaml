@@ -70,6 +70,11 @@ gitops:
     dockerRegistryOrg: ""
 {{- end }}
 
+{{- if hasKey .Requirements "buildPacks" }}
+    buildPackName: "{{ .Requirements.buildPacks.buildPackLibrary.name }}"
+    buildPackUrl: "{{ .Requirements.buildPacks.buildPackLibrary.gitURL }}"
+    buildPackRef: "{{ .Requirements.buildPacks.buildPackLibrary.gitRef }}"
+{{- end }}
 
   staging:
     repo: "{{ .Environments.staging.repository }}"
