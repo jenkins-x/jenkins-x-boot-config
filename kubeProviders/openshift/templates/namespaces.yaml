@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jx
+  labels:
+    jenkins.io/created-by: "jx-boot"
+    env: "dev"
+    team: "jx"
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jx-staging
+  labels:
+    jenkins.io/created-by: "jx-boot"
+    env: "staging"
+    team: "jx"
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jx-production
+  labels:
+    jenkins.io/created-by: "jx-boot"
+    env: "production"
+    team: "jx"
