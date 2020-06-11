@@ -1,1 +1,16 @@
 # Override configuration from https://github.com/jenkins-x/jenkins-x-platform/blob/master/jenkins-x-platform/values.yaml
+jenkins-x-platform:
+  PipelineSecrets:
+
+{{- if eq .Parameters.enableDocker true }}
+    DockerConfig: |-
+      {
+        "auths":{
+          {{ .Parameters.docker.url | quote }}:
+            {
+              "auth": {{ printf "%s:%s" .Parameters.docker.username .Parameters.docker.password | b64enc | quote}},
+              "email": {{ .Parameters.docker.email | quote}}
+            }
+        }
+      }
+{{- end}}

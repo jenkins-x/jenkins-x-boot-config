@@ -2,11 +2,24 @@
 jenkins-x-platform:
   PipelineSecrets:
 
+{{- if eq .Parameters.enableDocker true }}
+    DockerConfig: |-
+      {
+        "auths":{
+          {{ .Parameters.docker.url | quote }}:
+            {
+              "auth": {{ printf "%s:%s" .Parameters.docker.username .Parameters.docker.password | b64enc | quote}},
+              "email": {{ .Parameters.docker.email | quote}}
+            }
+        }
+      }
+{{- else}}
     # lets enable ACR docker builds
     DockerConfig: |-
       {
         "credsStore": "acr"
       }
-    
+{{- end}}
+
 docker-registry:
   enabled: false    
