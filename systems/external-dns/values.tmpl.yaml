@@ -15,6 +15,10 @@ external-dns:
  {{- if hasKey .Requirements.cluster "project" }}
     project: "{{ .Requirements.cluster.project }}"
  {{ end }}
+{{- else if eq .Requirements.cluster.provider "aks"}}
+  provider: azure
+  azure:
+    secretName: azure-external-dns-secret
 {{- end}}
 
   rbac:
