@@ -2,4 +2,4 @@ dependencies:
 - condition: velero.enabled
   alias: velero
   name: velero
-  repository: https://kubernetes-charts.storage.googleapis.com
+  repository: https://vmware-tanzu.github.io/helm-charts

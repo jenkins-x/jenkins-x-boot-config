@@ -17,7 +17,7 @@ velero:
 {{- if eq .Requirements.cluster.provider "gke" }}
   initContainers:
   - name: velero-plugin-for-gcp
-    image: velero/velero-plugin-for-gcp:v1.0.0
+    image: velero/velero-plugin-for-gcp:v1.1.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - mountPath: /target
@@ -30,7 +30,7 @@ velero:
 {{- else if or (eq .Requirements.cluster.provider "aws") (eq .Requirements.cluster.provider "eks") }}
   initContainers:
   - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.0.0
+    image: velero/velero-plugin-for-aws:v1.1.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - mountPath: /target
@@ -45,7 +45,7 @@ velero:
 {{- else if and (eq .Requirements.cluster.provider "aks") (hasKey .Requirements.velero "namespace") }}
   initContainers:
   - name: velero-plugin-for-azure
-    image: velero/velero-plugin-for-microsoft-azure:v1.0.0
+    image: velero/velero-plugin-for-microsoft-azure:v1.1.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - mountPath: /target
@@ -61,7 +61,7 @@ velero:
 {{- else if eq .Requirements.cluster.provider "iks" }}
   initContainers:
   - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.0.0
+    image: velero/velero-plugin-for-aws:v1.1.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - mountPath: /target

@@ -2,5 +2,5 @@
 
 |App Metadata||
 |---|---|
-| **Version** | 1.1.0 |
-| **Chart Repository** | https://kubernetes-charts.storage.googleapis.com |
+| **Version** | 2.12.0 |
+| **Chart Repository** | https://vmware-tanzu.github.io/helm-charts |
