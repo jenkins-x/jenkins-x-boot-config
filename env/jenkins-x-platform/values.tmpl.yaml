@@ -204,11 +204,14 @@ controllercommitstatus:
     enabled: false
 
 controllerrole:
-  role:
-    additionalNamespaces:
-    - jx-staging
-    - jx-production
+  enabled: false
+  serviceaccount:
+    enabled: false
+  deployment:
+    enabled: false
   clusterrole:
+    enabled: false
+  role:
     enabled: false
 
 controllerteam:

@@ -18,6 +18,9 @@ dependencies:
   repository: http://chartmuseum.jenkins-x.io
 - name: jenkins-x-platform
   repository: http://chartmuseum.jenkins-x.io
+- name: jx-role-controller
+  repository: https://chartmuseum.jenkins-x.io
+  version: 0.0.21
 #- condition: chartmuseum.enabled
 #  name: chartmuseum
 #  repository: http://chartmuseum.jenkins-x.io
