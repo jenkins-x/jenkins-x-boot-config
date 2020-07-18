@@ -42,7 +42,7 @@ velero:
       bucket: {{ .Requirements.storage.backup.url | removeScheme | quote }}
       config:
         region: {{ .Requirements.cluster.region | quote }}
-{{- else if eq .Requirements.cluster.provider "aks" }}
+{{- else if and (eq .Requirements.cluster.provider "aks") (hasKey .Requirements.velero "namespace") }}
   initContainers:
   - name: velero-plugin-for-azure
     image: velero/velero-plugin-for-microsoft-azure:v1.0.0
@@ -54,9 +54,10 @@ velero:
     provider: azure
     backupStorageLocation:
       name: azure
-      bucket: {{ .Requirements.storage.backup.url | removeScheme | quote }}
+      bucket: {{ .Requirements.velero.bucketName | removeScheme | quote }}
       config:
         storageAccount: {{ .Requirements.velero.serviceAccount | quote }}
+        resourceGroup: {{ .Requirements.velero.resourceGroup | quote }}
 {{- else if eq .Requirements.cluster.provider "iks" }}
   initContainers:
   - name: velero-plugin-for-aws
