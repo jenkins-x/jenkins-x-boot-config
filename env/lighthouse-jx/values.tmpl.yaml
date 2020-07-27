@@ -1,0 +1,5 @@
+{{- if eq .Requirements.webhook "lighthouse" }}
+enabled: true
+  {{- else }}
+enabled: false
+  {{- end }}

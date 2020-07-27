@@ -46,3 +46,7 @@ cluster:
     create: false
 {{- end }}
 {{- end }}
+
+# Disable the legacy jx controller in favor of lighthouse-jx's.
+engines:
+  jx: false
