@@ -6,16 +6,9 @@ metadata:
 spec:
   schedule: {{ .Values.velero.schedule | quote }}
   template:
-    excludedNamespaces: null
-    excludedResources: null
-    hooks:
-      resources: null
-    includeClusterResources: null
-    includedNamespaces:
-    - '*'
-    includedResources: null
-    labelSelector: null
-    storageLocation: ""
     ttl: {{ .Values.velero.ttl }}
-    volumeSnapshotLocations: null
+{{- if .Values.velero.snapshotsEnabled }}
+  volumeSnapshotLocations:
+    - volume-snapshots
+{{- end }}
 {{- end }}
