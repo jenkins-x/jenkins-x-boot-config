@@ -13,11 +13,11 @@ velero:
   credentials:
     useSecret: true
     existingSecret: velero-secret
-  snapshotsEnabled: false
 {{- if eq .Requirements.cluster.provider "gke" }}
+  snapshotsEnabled: false
   initContainers:
   - name: velero-plugin-for-gcp
-    image: velero/velero-plugin-for-gcp:v1.0.0
+    image: velero/velero-plugin-for-gcp:v1.1.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - mountPath: /target
@@ -28,9 +28,10 @@ velero:
       name: gcp
       bucket: {{ .Requirements.storage.backup.url | removeScheme | quote }}
 {{- else if or (eq .Requirements.cluster.provider "aws") (eq .Requirements.cluster.provider "eks") }}
+  snapshotsEnabled: true
   initContainers:
   - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.0.0
+    image: velero/velero-plugin-for-aws:v1.1.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - mountPath: /target
@@ -42,10 +43,15 @@ velero:
       bucket: {{ .Requirements.storage.backup.url | removeScheme | quote }}
       config:
         region: {{ .Requirements.cluster.region | quote }}
+    volumeSnapshotLocation:
+      name: volume-snapshots
+      config:
+        region: {{ .Requirements.cluster.region | quote }}
 {{- else if and (eq .Requirements.cluster.provider "aks") (hasKey .Requirements.velero "namespace") }}
+  snapshotsEnabled: false
   initContainers:
   - name: velero-plugin-for-azure
-    image: velero/velero-plugin-for-microsoft-azure:v1.0.0
+    image: velero/velero-plugin-for-microsoft-azure:v1.1.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - mountPath: /target
@@ -59,9 +65,10 @@ velero:
         storageAccount: {{ .Requirements.velero.serviceAccount | quote }}
         resourceGroup: {{ .Requirements.velero.resourceGroup | quote }}
 {{- else if eq .Requirements.cluster.provider "iks" }}
+  snapshotsEnabled: false
   initContainers:
   - name: velero-plugin-for-aws
-    image: velero/velero-plugin-for-aws:v1.0.0
+    image: velero/velero-plugin-for-aws:v1.1.0
     imagePullPolicy: IfNotPresent
     volumeMounts:
     - mountPath: /target
